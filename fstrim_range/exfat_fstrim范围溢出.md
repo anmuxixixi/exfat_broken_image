@@ -174,7 +174,7 @@ chmod +x reproduce_exfat_partial_fitrim.sh
 
 执行脚本`./reproduce_exfat_partial_fitrim.sh`
 
-<img src="exfat_fstrim范围溢出/image-20260815201040668.png" alt="image-20260815201040668" style="zoom:67%;" />
+<img src="../image/exfat_fstrim范围溢出/image-20260815201040668.png" alt="image-20260815201040668" style="zoom:67%;" />
 
 >问题复现，我们测试脚本里面发起的request_len为1 cluster(131072 bytes)，实际返回的trim len为2 cluster(262144 bytes)
 
@@ -214,7 +214,7 @@ sync
 fstrim_ioctl /mnt/exfat_fs 15M 128K 512
 ```
 
-<img src="exfat_fstrim范围溢出/image-20260815201414528.png" alt="image-20260815201414528" style="zoom:80%;" />
+<img src="../image/exfat_fstrim范围溢出/image-20260815201414528.png" alt="image-20260815201414528" style="zoom:80%;" />
 
 >写的是回收128K，实际回收了1MB
 
