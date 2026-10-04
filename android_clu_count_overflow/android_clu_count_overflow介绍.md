@@ -13,11 +13,14 @@
 
 编译:
 ```
-./configure \
-  CFLAGS="-O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer" \
-  LDFLAGS="-fsanitize=address,undefined"
+./autogen.sh
 
-make -j"$(nproc)"
+CC=clang \
+CFLAGS="-O0 -g -fsanitize=address,unsigned-integer-overflow -fno-omit-frame-pointer" \
+LDFLAGS="-fsanitize=address,unsigned-integer-overflow" \
+./configure
+
+make
 ```
 
 故障注入:
@@ -27,6 +30,8 @@ mkfs.exfat exfat.img
 python repro_build.py exfat.img
 mkfs.exfat -n exfat.img
 ```
+
+> 故障注入的脚本其实很简单，就是把clu_count的大小改成了0xffffffff，然后计算checksum值，随后把checksum扇区的数值更新一下
 
 复现:
 ```shell
